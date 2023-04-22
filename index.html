@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      src="https://kit.fontawesome.com/6c5198f753.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main.css" />
+    <title>Project manager</title>
+  </head>
+  <body>
+    <div class="app-container wrapper">
+      <h1>Project manager</h1>
+      <div class="app-controls">
+        <button>Add Task</button>
+        <div class="task-creator-form">
+          <h2>Create a task</h2>
+          <div class="task-form-details">
+            <div class="task-form-title">
+                <label >Task name:</label>
+                <input class="task-form-name"  type="text">
+            </div>
+            <label>Category:</label>
+            <select name="task-form-category" id="task-form-category">
+              <option value="">Please choose a Category</option>
+              <option value="Client-Request">Client Request</option>
+              <option value="Code-review">Code review</option>
+              <option value="Help-desk-Ticket">Help desk ticket</option>
+              <option value="landing-page">Landing page</option>
+            </select>
+            <label>User:</label>
+            <select name="task-form-user" id="task-form-user">
+              <option value="">Please choose a user</option>
+              <option value="michael-scott">Michael Scott</option>
+              <option value="dwight-schrute">Dwight Schrute</option>
+              <option value="jim-halpert">Jim Halpert</option>
+              <option value="kevin-malone">Kevin Malone</option>
+              <option value="creed">Creed</option>
+            </select>
+            <label>Deadline:</label>
+            <input
+              type="date"
+              id="start"
+              name="trip-start"
+              value="2018-07-22"
+              min="2018-01-01"
+              max="2018-12-31"
+            />
+            <div class="task-form-description">
+                <label>Please Describe the task above:</label>
+                <input type="text">
+            </div>
+            <div class="task-form-buttons">
+                <button class="task-form-create-btn">Create Task</button>
+                <button>Cancel</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="tasks-container wrapper">
+        <div class="to-be-done task-list" draggable="true">
+          <h2>To be done</h2>
+          <div class="task" id="1">
+            <h3 class="task-title">#01 - Create graphic</h3>
+            <p class="task-category">Project: <span>Grpahic design</span></p>
+            <p class="task-user">Assigned to: <span>Marcel</span></p>
+            <p class="task-date-created">Created: <span>21.03.2023</span></p>
+            <p class="task-deadline">Deadline: <span>21.05.2023</span></p>
+            <div class="task-btns">
+              <button class="task-edit-btn">Edit</button>
+              <button class="task-progrees-btn">Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="In porgress task-list">
+          <h2>In progress</h2>
+          <div class="task" id="2">
+            <h3 class="task-title">#01 - Create graphic</h3>
+            <p class="task-category">Project: <span>Grpahic design</span></p>
+            <p class="task-user">Assigned to: <span>Marcel</span></p>
+            <p class="task-date-created">Created: <span>21.03.2023</span></p>
+            <p class="task-deadline">Deadline: <span>21.05.2023</span></p>
+            <div class="task-btns">
+              <button class="task-edit-btn">Edit</button>
+              <button class="task-progrees-btn">Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="To be tested task-list">
+          <h2>To be tested</h2>
+          <div class="task" id="3">
+            <h3 class="task-title">#01 - Create graphic</h3>
+            <p class="task-category">Project: <span>Grpahic design</span></p>
+            <p class="task-user">Assigned to: <span>Marcel</span></p>
+            <p class="task-date-created">Created: <span>21.03.2023</span></p>
+            <p class="task-deadline">Deadline: <span>21.05.2023</span></p>
+            <div class="task-btns">
+              <button class="task-edit-btn">Edit</button>
+              <button class="task-progrees-btn">Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="Completed task-list">
+          <h2>Completed</h2>
+          <div class="task" id="4">
+            <h3 class="task-title">#01 - Create graphic</h3>
+            <p class="task-category">Project: <span>Grpahic design</span></p>
+            <p class="task-user">Assigned to: <span>Marcel</span></p>
+            <p class="task-date-created">Created: <span>21.03.2023</span></p>
+            <p class="task-deadline">Deadline: <span>21.05.2023</span></p>
+            <div class="task-btns">
+              <button class="task-edit-btn">Edit</button>
+              <button class="task-progrees-btn">Started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

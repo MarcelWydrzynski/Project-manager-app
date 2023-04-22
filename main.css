@@ -1,0 +1,150 @@
+.wrapper {
+  max-width: 1440px;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+body {
+  background-color: rgb(217, 255, 212);
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tasks-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.task-list {
+  border: 2px solid red;
+  width: 25%;
+  max-width: 300px;
+}
+.task-list h2 {
+  text-align: center;
+  padding: 10px;
+}
+
+.task {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 2px solid orange;
+}
+.task h3 {
+  border-bottom: dashed black;
+  padding-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.task span {
+  color: #30d5c8;
+}
+
+.task-btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.task-btns button {
+  max-width: 80px;
+  width: 50%;
+  background-color: wheat;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.task-creator-form {
+  width: 50vw;
+  height: 50vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: white;
+  transform: translate(-50%, -50%);
+}
+
+.task-form-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task-form-description {
+  display: flex;
+  flex-direction: column;
+}
+.task-form-description input {
+  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  border: 3px solid green;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 30px;
+}
+.app-container h1 {
+  text-align: center;
+}
+
+.app-controls {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+.app-controls button {
+  background-color: wheat;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}/*# sourceMappingURL=main.css.map */
