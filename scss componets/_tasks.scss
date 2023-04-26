@@ -19,8 +19,10 @@
   gap: 5px;
   overflow: scroll;
   overflow-x: hidden;
-  ov
-  
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   h2 {
     text-align: center;
@@ -35,7 +37,7 @@
   background-color: #d07777;
 }
 
-.In-progress {
+.in-progress {
   background-color: #d6ca45;
 }
 
@@ -58,12 +60,15 @@
   border-radius: 5px;
   background-color: wheat;
   width: 80%;
-  height: 230px;
 
   h3 {
     border-bottom: dashed black;
     padding-bottom: 10px;
     text-align: center;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   p {
@@ -87,4 +92,8 @@
     padding: 5px 10px;
     cursor: pointer;
   }
+}
+
+.is-dragging {
+  background-color: red;
 }
