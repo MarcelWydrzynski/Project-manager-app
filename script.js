@@ -10,15 +10,20 @@ const taskProgreesBtns = document.querySelectorAll(".task-progrees-btn");
 //Task Creating form
 const form = document.querySelector(".task-creator-form");
 const formName = document.querySelector(".form-name");
+const formNameError = document.querySelector(".form-name-error");
 const formCategory = document.querySelector(".form-category");
+const formCategoryError = document.querySelector(".form-category-error");
 const formUser = document.querySelector(".form-user");
+const formUserError = document.querySelector(".form-user-error");
 const formDeadline = document.querySelector(".form-deadline");
+const formDeadlineError = document.querySelector(".form-deadline-error");
+const formDescription = document.querySelector(".form-description");
+const formDescriptionError = document.querySelector(".form-description");
 const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
 
 //Function to make tasks draggables
 const tasksDraggable = () => {
   const tasks = document.querySelectorAll(".task");
-
   tasks.forEach((task) => {
     task.addEventListener("dragstart", () => {
       task.classList.add("is-dragging");
@@ -104,7 +109,7 @@ const getCurrentDate = () => {
   date = dateFormatted;
 };
 
-const checkInputs = () => {
+const checkSelectedIndex = () => {
   const selectedCategory = formCategory.options[formCategory.selectedIndex];
   selectedCategoryText = selectedCategory.text;
 
@@ -140,8 +145,44 @@ const createTask = () => {
   id++;
   taskNumber++;
   console.log(id);
-
   tasksDraggable();
 };
 
-formCreateTaskBtn.addEventListener("click", createTask);
+// const form = document.querySelector(".task-creator-form");
+// const formName = document.querySelector(".form-name");
+// const formNameError = document.querySelector(".form-name-error");
+// const formCategory = document.querySelector(".form-category");
+// const formCategoryError = document.querySelector(".form-category-error");
+// const formUser = document.querySelector(".form-user");
+// const formUserError = document.querySelector(".form-user-error");
+// const formDeadline = document.querySelector(".form-deadline");
+// const formDeadlineError = document.querySelector(".form-deadline-error");
+// const formDescription = document.querySelector(".form-description");
+// const formDescriptionError = document.querySelector(".form-description");
+// const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
+
+//Check inputs and create a new task
+const createNewTask = () => {
+  checkSelectedIndex();
+
+  //check task name input
+  if (formName.value == "") {
+    formNameError.style.visibility = "visible";
+    formNameError.innerHTML = "Task name cannot be empty!";
+  } else if (formName.value.length >= 40) {
+    formNameError.style.visibility = "visible";
+    formNameError.innerHTML = "Task name cannot be longer then 40 characters!";
+  } else {
+    formNameError.style.visibility = "hidden";
+  }
+
+  //check task category
+  if (selectedCategoryText == "Please choose a Category") {
+    formCategoryError.style.visibility = "visible";
+    formCategoryError.innerHTML = "A category must be chosen for this task!";
+  } else {
+    formCategoryError.style.visibility = "hidden";
+  }
+};
+
+formCreateTaskBtn.addEventListener("click", createNewTask);
