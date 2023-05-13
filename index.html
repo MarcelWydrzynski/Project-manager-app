@@ -26,18 +26,24 @@
           <h2>Create a task</h2>
           <div class="form-details">
             <p class="form-name-error error-msg">Task name cannot be empty!</p>
-            <input class="form-name" type="text" placeholder="Task Name" />
-            <p class="form-category-error error-msg">Category cannot be empty</p>
+            <input class="form-name" type="text" placeholder="Task Name"/>
+            <p class="form-category-error error-msg">
+              A category must be chosen for this task!
+            </p>
             <select name="form-category" class="form-category">
-              <option disabled selected value="">Please choose a Category</option>
+              <option disabled selected value="">
+                Please choose a Category
+              </option>
               <option value="Client-Request">Client Request</option>
               <option value="Code-review">Code review</option>
               <option value="Help-desk-Ticket">Help desk ticket</option>
               <option value="landing-page">Landing page</option>
             </select>
-            <p class="form-user-error error-msg">A user must be chosen for this task!</p>
+            <p class="form-user-error error-msg">
+              A user must be chosen for this task!
+            </p>
             <select name="form-user" class="form-user">
-              <option value="">Please choose a user</option>
+              <option disabled selected value="">Please choose a user</option>
               <option value="michael-scott">Michael Scott</option>
               <option value="dwight-schrute">Dwight Schrute</option>
               <option value="jim-halpert">Jim Halpert</option>
@@ -45,33 +51,33 @@
               <option value="creed">Creed</option>
             </select>
             <p class="form-deadline-error error-msg">Deadline must be set!</p>
-            <input class="form-deadline" type="date"/>
-            <p class="form-description-error error-msg">Task description cannot be empty!</p>
+            <input class="form-deadline" type="date" />
             <div class="form-description">
+              <p class="form-description-error error-msg">
+                A date must be chosen for this task!
+              </p>
               <label>Please Describe the task above:</label>
-              <textarea name="" id="" cols="30" rows="10"></textarea>
+              <textarea
+                class="form-description-textarea"
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
             </div>
             <div class="form-buttons">
               <button class="task-form-create-btn">Create Task</button>
               <button>Cancel</button>
             </div>
+            <p class="form-task-error error-msg">
+              Please fill out all spaces correctly!
+            </p>
           </div>
         </div>
       </div>
       <div class="tasks-container">
         <div class="to-be-done task-list">
           <h2>To be done</h2>
-          <div class="task" id="1" draggable="true">
-            <h3 class="task-title">#01 - Create graphic</h3>
-            <p class="task-category">Project: <span>Grpahic design</span></p>
-            <p class="task-user">Assigned to: <span>Marcel Wydrzyński</span></p>
-            <p class="task-date-created">Created: <span>21.03.2023</span></p>
-            <p class="task-deadline">Deadline: <span>21.05.2023</span></p>
-            <div class="task-btns">
-              <button class="task-edit-btn">Edit</button>
-              <button class="task-progrees-btn">Move to next stage</button>
-            </div>
-          </div>
         </div>
         <div class="in-progress task-list">
           <h2>In Progress</h2>

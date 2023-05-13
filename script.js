@@ -17,9 +17,12 @@ const formUser = document.querySelector(".form-user");
 const formUserError = document.querySelector(".form-user-error");
 const formDeadline = document.querySelector(".form-deadline");
 const formDeadlineError = document.querySelector(".form-deadline-error");
-const formDescription = document.querySelector(".form-description");
-const formDescriptionError = document.querySelector(".form-description");
+const formDescriptionTextArea = document.querySelector(
+  ".form-description-textarea"
+);
+const formDescriptionError = document.querySelector(".form-description-error");
 const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
+const formTaskError = document.querySelector(".form-task-error");
 
 //Function to make tasks draggables
 const tasksDraggable = () => {
@@ -64,12 +67,11 @@ const tasksDraggable = () => {
         closestTask = task;
       }
     });
-
     return closestTask;
   };
 };
 
-//function for the task next stage button
+//function that moves the task to the next stage in app
 const progressTaskFurther = (event) => {
   const ProgreesBtn = event.target;
   const parentContainer = ProgreesBtn.closest(".task-list");
@@ -85,20 +87,17 @@ const progressTaskFurther = (event) => {
   }
 };
 
-//panel Controls
-const addTaskBtn = document.querySelector(".add-task-Btn");
-addTaskBtn.addEventListener("click", () => {
-  form.style.display = "flex";
-});
-
-let id = 1;
+//Sets id & date & and task number to null
+let id = 0;
 let date;
-let taskNumber = 1;
+let taskNumber = 0;
 
 //form inputs
 let selectedCategoryText;
 let selectedUserText;
 
+
+// function to get today date
 const getCurrentDate = () => {
   const currentDate = new Date();
   const day = currentDate.getDate();
@@ -109,6 +108,7 @@ const getCurrentDate = () => {
   date = dateFormatted;
 };
 
+//function that assigns select option to a variable
 const checkSelectedIndex = () => {
   const selectedCategory = formCategory.options[formCategory.selectedIndex];
   selectedCategoryText = selectedCategory.text;
@@ -117,9 +117,9 @@ const checkSelectedIndex = () => {
   selectedUserText = selectedUser.text;
 };
 
-const createTask = () => {
+//function that creates a div and adds it to app
+const taskCreation = () => {
   getCurrentDate();
-  checkInputs();
   form.style.display = "flex";
   const newTask = document.createElement("div");
   newTask.classList.add("task");
@@ -148,21 +148,9 @@ const createTask = () => {
   tasksDraggable();
 };
 
-// const form = document.querySelector(".task-creator-form");
-// const formName = document.querySelector(".form-name");
-// const formNameError = document.querySelector(".form-name-error");
-// const formCategory = document.querySelector(".form-category");
-// const formCategoryError = document.querySelector(".form-category-error");
-// const formUser = document.querySelector(".form-user");
-// const formUserError = document.querySelector(".form-user-error");
-// const formDeadline = document.querySelector(".form-deadline");
-// const formDeadlineError = document.querySelector(".form-deadline-error");
-// const formDescription = document.querySelector(".form-description");
-// const formDescriptionError = document.querySelector(".form-description");
-// const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
 
 //Check inputs and create a new task
-const createNewTask = () => {
+const CreateTask = () => {
   checkSelectedIndex();
 
   //check task name input
@@ -178,11 +166,59 @@ const createNewTask = () => {
 
   //check task category
   if (selectedCategoryText == "Please choose a Category") {
+    formUserError.style.visibility = "visible";
+    formUserError.innerHTML = "A user must be chosen for this task!";
+  } else {
+    formUserError.style.visibility = "hidden";
+  }
+
+  //check task user
+  if (selectedUserText == "Please choose a user") {
     formCategoryError.style.visibility = "visible";
     formCategoryError.innerHTML = "A category must be chosen for this task!";
   } else {
     formCategoryError.style.visibility = "hidden";
   }
+
+  //check task deadline
+  if (formDeadline.value == "") {
+    formDeadlineError.style.visibility = "visible";
+    formDeadlineError.innerHTML = "A date must be chosen for this task!";
+  } else {
+    formDeadlineError.style.visibility = "hidden";
+  }
+
+  //check task description
+  if (formDescriptionTextArea.value == "") {
+    formDescriptionError.style.visibility = "visible";
+    formDescriptionError.innerHTML = "Task description cannot be empty!";
+  } else {
+    formDescriptionError.style.visibility = "hidden";
+  }
+
+  if (
+    formNameError.style.visibility == "visible" ||
+    formUserError.style.visibility == "visible" ||
+    formCategoryError.style.visibility == "visible" ||
+    formDeadlineError.style.visibility == "visible" ||
+    formDescriptionError.style.visibility == "visible"
+  ) {
+    formTaskError.style.visibility = "visible";
+  } else {
+    formTaskError.style.visibility = "hidden";
+    taskCreation();
+    formName.value = "";
+    formDeadline.value = "";
+    selectedCategoryText = "Please choose a user";
+    formDescriptionTextArea.value = "";
+  }
 };
 
-formCreateTaskBtn.addEventListener("click", createNewTask);
+
+
+formCreateTaskBtn.addEventListener("click", CreateTask);
+
+const addTaskBtn = document.querySelector(".add-task-Btn");
+addTaskBtn.addEventListener("click", () => {
+  form.style.display = "flex";
+});
