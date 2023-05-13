@@ -51,7 +51,7 @@
 
 .task {
   display: flex;
-  flex-wrap: wrap;
+  
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
@@ -64,10 +64,7 @@
   h3 {
     border-bottom: dashed black;
     padding-bottom: 10px;
-    text-align: center;
-    
-    min-height: 60px;
-    overflow: wrap;
+    text-align: left;
   }
 
   p {
@@ -77,6 +74,27 @@
   span {
     font-weight: 500;
   }
+}
+
+.task-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-text-details {
+ display: flex;
+ flex-direction: column;
+ width: 50%;
+ gap: 10px;
+ 
+
+}
+
+.task-details-img {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .task-btns {
@@ -93,6 +111,75 @@
   }
 }
 
-.is-dragging {
-  background-color: red;
+.task-active {
+  width: 30vw;
+  height: 50vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  
+
+  .task-progrees-btn {
+    display: none;
+  }
+  p,
+  h3,
+  h4,
+  button,
+  textarea {
+    font-size: 21px;
+  }
+}
+
+.task-comments {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: scroll;
+  max-height: 40%;
+  
+  h3 {
+    border: none;
+  }
+}
+
+
+.comment-section {
+  border-radius: 5px;
+  textarea {
+    width: 100%;
+    height: auto;
+    background-color: wheat;
+    resize: none;
+    border-radius: 5px;
+    color: black;
+    border: 1px solid black;
+    outline: none;
+  }
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  span {
+    font-weight: 800;
+  }
+  p {
+    font-weight: 300;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+  }
+}
+
+.task-comment-error {
+  color: rgba(255, 0, 0, 0.575);
+  font-size: 22px;
+  font-weight: 800;
+  // visibility: hidden;
+  text-align: center;
 }

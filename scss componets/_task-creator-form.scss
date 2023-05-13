@@ -12,6 +12,7 @@
   border-radius: 5px;
   border: 2px solid black;
   padding: 10px 5px;
+  display: none;
 
   h2 {
     text-align: center;
@@ -24,6 +25,7 @@
   align-items: center;
   gap: 10px;
   padding: 20px 0px;
+  width: 100%;
 
   select,
   input,
@@ -31,6 +33,7 @@
     font-size: 22px;
     width: 100%;
     text-align: center;
+    resize: none;
   }
 }
 

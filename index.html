@@ -26,7 +26,7 @@
           <h2>Create a task</h2>
           <div class="form-details">
             <p class="form-name-error error-msg">Task name cannot be empty!</p>
-            <input class="form-name" type="text" placeholder="Task Name"/>
+            <input class="form-name" type="text" placeholder="Task Name" />
             <p class="form-category-error error-msg">
               A category must be chosen for this task!
             </p>
@@ -67,7 +67,7 @@
             </div>
             <div class="form-buttons">
               <button class="task-form-create-btn">Create Task</button>
-              <button>Cancel</button>
+              <button class="task-form-close-btn">Cancel</button>
             </div>
             <p class="form-task-error error-msg">
               Please fill out all spaces correctly!
@@ -78,6 +78,53 @@
       <div class="tasks-container">
         <div class="to-be-done task-list">
           <h2>To be done</h2>
+          <div class="task task-active" id="0">
+            <div class="task-details">
+              <div class="task-text-details">
+                <h3 class="task-title">#0 - asfasf</h3>
+                <p class="task-category">Project: <span>Code review</span></p>
+                <p class="task-user">Assigned to: <span>Jim Halpert</span></p>
+                <p class="task-date-created">Created: <span>2023-5-13</span></p>
+                <p class="task-deadline">Deadline: <span>2023-05-18</span></p>
+              </div>
+              <div class="task-details-img">
+                <img src="./Images/code-review.png" alt="" />
+              </div>
+            </div>
+            <div class="task-comments">
+              <h3>task comments</h3>
+              <div class="comment-section">
+                <textarea
+                  class="comment-textarea"
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="5"
+                  placeholder="Type new comment here"
+                ></textarea>
+                <ul class="comments-container">
+                  <li class="comment">
+                    <h4>
+                      Posted by <span>admin</span> on the day of
+                      <span>14/14/14</span>
+                    </h4>
+                    <p>lorem</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="task-btns">
+              <button class="task-edit-btn">Edit</button>
+              <button class="task-comment-btn">Post comment</button>
+              <button
+                onclick="progressTaskFurther(event)"
+                class="task-progrees-btn"
+              >
+                Move to next stage
+              </button>
+            </div>
+            <p class="task-comment-error">You cannot post a empty comment!</p>
+          </div>
         </div>
         <div class="in-progress task-list">
           <h2>In Progress</h2>

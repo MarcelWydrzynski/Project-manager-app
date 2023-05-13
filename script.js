@@ -22,54 +22,24 @@ const formDescriptionTextArea = document.querySelector(
 );
 const formDescriptionError = document.querySelector(".form-description-error");
 const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
+const FormCancelBtn = document.querySelector(".task-form-close-btn");
 const formTaskError = document.querySelector(".form-task-error");
 
-//Function to make tasks draggables
-const tasksDraggable = () => {
-  const tasks = document.querySelectorAll(".task");
-  tasks.forEach((task) => {
-    task.addEventListener("dragstart", () => {
-      task.classList.add("is-dragging");
-    });
+//task comment section
+const commentsContainer = document.querySelector(".comments-container");
+const commentTextarea = document.querySelector(".comment-textarea");
+const taskCommentBtn = document.querySelector(".task-comment-btn");
+const taskCommentError = document.querySelector(".task-comment-error");
 
-    task.addEventListener("dragend", () => {
-      task.classList.remove("is-dragging");
-    });
-  });
+//Sets id & date & and task number to null
+let id = 0;
+let date;
+let taskNumber = 0;
+let commentId = 0;
 
-  taskConatiners.forEach((container) => {
-    container.addEventListener("dragover", (e) => {
-      e.preventDefault();
-
-      const bottomTask = insertAboveTask(container, e.clientY);
-      const curTask = document.querySelector(".is-dragging");
-
-      if (!bottomTask) {
-        container.appendChild(curTask);
-      } else {
-        container.insertBefore(curTask, bottomTask);
-      }
-    });
-  });
-
-  const insertAboveTask = (container, mouseY, curTask) => {
-    const els = container.querySelectorAll(".task:not(.is-dragging)");
-
-    let closestTask = null;
-    let closestOffSet = Number.NEGATIVE_INFINITY;
-
-    els.forEach((task) => {
-      const { top } = task.getBoundingClientRect();
-      const offset = mouseY - top;
-
-      if (offset < 0 && offset > closestOffSet) {
-        closestOffSet = offset;
-        closestTask = task;
-      }
-    });
-    return closestTask;
-  };
-};
+//form inputs
+let selectedCategoryText;
+let selectedUserText;
 
 //function that moves the task to the next stage in app
 const progressTaskFurther = (event) => {
@@ -86,16 +56,6 @@ const progressTaskFurther = (event) => {
     completedContainer.appendChild(parentTask);
   }
 };
-
-//Sets id & date & and task number to null
-let id = 0;
-let date;
-let taskNumber = 0;
-
-//form inputs
-let selectedCategoryText;
-let selectedUserText;
-
 
 // function to get today date
 const getCurrentDate = () => {
@@ -124,7 +84,6 @@ const taskCreation = () => {
   const newTask = document.createElement("div");
   newTask.classList.add("task");
   newTask.setAttribute("id", id);
-  newTask.setAttribute("draggable", "true");
   newTask.innerHTML = `
     <h3 class="task-title">#${taskNumber} - ${formName.value}</h3>
     <p class="task-category">Project: <span>${selectedCategoryText}</span></p>
@@ -138,16 +97,10 @@ const taskCreation = () => {
   </div>`;
 
   toBeDoneTaskList.appendChild(newTask);
-  formCategory.selectedIndex = 0;
-  formUser.selectedIndex = 0;
-
   form.style.display = "none";
   id++;
   taskNumber++;
-  console.log(id);
-  tasksDraggable();
 };
-
 
 //Check inputs and create a new task
 const CreateTask = () => {
@@ -157,15 +110,15 @@ const CreateTask = () => {
   if (formName.value == "") {
     formNameError.style.visibility = "visible";
     formNameError.innerHTML = "Task name cannot be empty!";
-  } else if (formName.value.length >= 40) {
+  } else if (formName.value.length >= 55) {
     formNameError.style.visibility = "visible";
-    formNameError.innerHTML = "Task name cannot be longer then 40 characters!";
+    formNameError.innerHTML = "Task name cannot be longer then 55 characters!";
   } else {
     formNameError.style.visibility = "hidden";
   }
 
   //check task category
-  if (selectedCategoryText == "Please choose a Category") {
+  if (selectedUserText == "Please choose a user") {
     formUserError.style.visibility = "visible";
     formUserError.innerHTML = "A user must be chosen for this task!";
   } else {
@@ -173,7 +126,7 @@ const CreateTask = () => {
   }
 
   //check task user
-  if (selectedUserText == "Please choose a user") {
+  if (selectedCategoryText == "Please choose a Category") {
     formCategoryError.style.visibility = "visible";
     formCategoryError.innerHTML = "A category must be chosen for this task!";
   } else {
@@ -206,19 +159,56 @@ const CreateTask = () => {
     formTaskError.style.visibility = "visible";
   } else {
     formTaskError.style.visibility = "hidden";
+
     taskCreation();
+
     formName.value = "";
+    formCategory.selectedIndex = 0;
+    formUser.selectedIndex = 0;
     formDeadline.value = "";
-    selectedCategoryText = "Please choose a user";
     formDescriptionTextArea.value = "";
   }
 };
 
+//Function to create and add new comment to task
+const postNewComment = () => {
 
+  getCurrentDate()
 
+  if (commentTextarea.value == "") {
+    taskCommentError.style.visibility = "visible";
+  } else {
+    taskCommentError.style.visibility = "hidden";
+    const newComment = document.createElement("li");
+    newComment.classList.add("comment");
+    newComment.setAttribute("id", commentId);
+    newComment.innerHTML = `
+    <h4>Posted by <span>admin</span> on the day of<span> ${date}</span>
+    </h4>
+    <p>${commentTextarea.value}</p>`;
+    commentsContainer.prepend(newComment);
+    commentTextarea.value = "";
+  }
+};
+
+//Creates a new task
 formCreateTaskBtn.addEventListener("click", CreateTask);
 
 const addTaskBtn = document.querySelector(".add-task-Btn");
+//Open form to create tasks
 addTaskBtn.addEventListener("click", () => {
   form.style.display = "flex";
 });
+
+//close form to create tasks and clear inputs
+FormCancelBtn.addEventListener("click", () => {
+  formName.value = "";
+  formCategory.selectedIndex = 0;
+  formUser.selectedIndex = 0;
+  formDeadline.value = "";
+  formDescriptionTextArea.value = "";
+  form.style.display = "none";
+});
+
+//Post new comment under task
+taskCommentBtn.addEventListener("click", postNewComment);
