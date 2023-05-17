@@ -3,8 +3,7 @@
 .app-container {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    background-color: #a7a7a7;
+    background-color: #767575;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,7 +16,6 @@
 
     h1 {
         text-align: center;
-        text-shadow: 1px 1px #ffffff;
         font-weight: 800;
     }
 }
@@ -28,10 +26,17 @@
     justify-content: flex-end;
 
     button {
-        background-color: wheat;
         border-radius: 5px;
         border: none;
         padding: 10px 15px;
         cursor: pointer;
     }
 }
+
+@media all and (max-width: 1050px) {
+    .app-container {
+        height: 100%;
+        border-radius: 0;
+       
+    }
+   }

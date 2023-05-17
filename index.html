@@ -44,10 +44,10 @@
             </p>
             <select name="form-user" class="form-user">
               <option disabled selected value="">Please choose a user</option>
-              <option value="michael-scott">Michael Scott</option>
-              <option value="dwight-schrute">Dwight Schrute</option>
-              <option value="jim-halpert">Jim Halpert</option>
-              <option value="kevin-malone">Kevin Malone</option>
+              <option value="michael Scott">Michael Scott</option>
+              <option value="dwight schrute">Dwight Schrute</option>
+              <option value="jim halpert">Jim Halpert</option>
+              <option value="kevin malone">Kevin Malone</option>
               <option value="creed">Creed</option>
             </select>
             <p class="form-deadline-error error-msg">Deadline must be set!</p>
@@ -78,7 +78,7 @@
       <div class="tasks-container">
         <div class="to-be-done task-list">
           <h2>To be done</h2>
-          <div class="task task-active" id="0">
+          <div class="task" id="0">
             <div class="task-details">
               <div class="task-text-details">
                 <h3 class="task-title">#0 - asfasf</h3>
@@ -86,9 +86,6 @@
                 <p class="task-user">Assigned to: <span>Jim Halpert</span></p>
                 <p class="task-date-created">Created: <span>2023-5-13</span></p>
                 <p class="task-deadline">Deadline: <span>2023-05-18</span></p>
-              </div>
-              <div class="task-details-img">
-                <img src="./Images/code-review.png" alt="" />
               </div>
             </div>
             <div class="task-comments">
@@ -103,19 +100,13 @@
                   placeholder="Type new comment here"
                 ></textarea>
                 <ul class="comments-container">
-                  <li class="comment">
-                    <h4>
-                      Posted by <span>admin</span> on the day of
-                      <span>14/14/14</span>
-                    </h4>
-                    <p>lorem</p>
-                  </li>
                 </ul>
               </div>
             </div>
             <div class="task-btns">
-              <button class="task-edit-btn">Edit</button>
-              <button class="task-comment-btn">Post comment</button>
+              <button onclick="editTask(event)" class="task-edit-btn"> Edit</button>
+              <button onclick="hideTask(event)" class="task-save-btn">Save</button>
+              <button onclick="postNewComment(event)" class="task-comment-btn">Post comment</button>
               <button
                 onclick="progressTaskFurther(event)"
                 class="task-progrees-btn"
@@ -141,3 +132,4 @@
     <script src="script.js"></script>
   </body>
 </html>
+

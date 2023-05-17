@@ -3,7 +3,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  background: rgb(87, 155, 184);
+  background: rgb(126, 132, 134);
   transform: translate(-50%, -50%);
   flex-direction: column;
   z-index: 5;
@@ -34,7 +34,17 @@
     width: 100%;
     text-align: center;
     resize: none;
+    outline: none;
   }
+
+  input[type="date"] { 
+    outline: none;
+  }
+
+  textarea {
+    text-align: left;
+  }
+  
 }
 
 .form-description {
@@ -50,9 +60,22 @@
 }
 
 .error-msg {
-    color: rgba(255, 0, 0, 0.575);
+    color: rgba(190, 19, 19, 0.83);
     font-size: 22px;
     font-weight: 800;
     visibility: hidden;
     text-align: center;
 }
+
+@media all and (max-width: 900px) {
+ .task-creator-form {
+  width: 100%;
+  height: 100%;
+ }
+ }
+
+ @media all and (max-width: 500px) {
+  .form-details {
+    gap: 5px;
+  }
+  }

@@ -1,11 +1,8 @@
 //Tasks and task Containers
 const toBeDoneTaskList = document.querySelector(".to-be-done");
-const taskConatiners = document.querySelectorAll(".task-list");
-const toBeDoneConatiner = document.querySelector(".to-be-done");
 const inProgressConatiner = document.querySelector(".in-progress");
 const toBeTestedContainer = document.querySelector(".to-be-tested");
 const completedContainer = document.querySelector(".completed");
-const taskProgreesBtns = document.querySelectorAll(".task-progrees-btn");
 
 //Task Creating form
 const form = document.querySelector(".task-creator-form");
@@ -25,17 +22,10 @@ const formCreateTaskBtn = document.querySelector(".task-form-create-btn");
 const FormCancelBtn = document.querySelector(".task-form-close-btn");
 const formTaskError = document.querySelector(".form-task-error");
 
-//task comment section
-const commentsContainer = document.querySelector(".comments-container");
-const commentTextarea = document.querySelector(".comment-textarea");
-const taskCommentBtn = document.querySelector(".task-comment-btn");
-const taskCommentError = document.querySelector(".task-comment-error");
-
 //Sets id & date & and task number to null
-let id = 0;
+let id = 1;
 let date;
-let taskNumber = 0;
-let commentId = 0;
+let taskNumber = 1;
 
 //form inputs
 let selectedCategoryText;
@@ -45,16 +35,40 @@ let selectedUserText;
 const progressTaskFurther = (event) => {
   const ProgreesBtn = event.target;
   const parentContainer = ProgreesBtn.closest(".task-list");
-  const parentTask = ProgreesBtn.closest(".task");
+  const currentTask = ProgreesBtn.closest(".task");
 
   if (parentContainer.classList.contains("to-be-done")) {
-    parentContainer.removeChild(parentTask);
-    inProgressConatiner.appendChild(parentTask);
+    parentContainer.removeChild(currentTask);
+    inProgressConatiner.appendChild(currentTask);
   } else if (parentContainer.classList.contains("in-progress")) {
-    toBeTestedContainer.appendChild(parentTask);
+    toBeTestedContainer.appendChild(currentTask);
   } else if (parentContainer.classList.contains("to-be-tested")) {
-    completedContainer.appendChild(parentTask);
+    completedContainer.appendChild(currentTask);
+
+    const deleteBtn = ProgreesBtn.closest(".task-progrees-btn");
+    deleteBtn.innerHTML = "Delete Task";
+
+    deleteBtn.addEventListener("click", () => {
+      currentTask.remove();
+    });
   }
+};
+
+//function to enable task editing
+const editTask = (event) => {
+  const editBtn = event.target;
+  const currentTask = editBtn.closest(".task");
+  currentTask.classList.add("task-active");
+};
+
+const hideTask = (event) => {
+  const saveBtn = event.target;
+  const currentTask = saveBtn.closest(".task");
+  currentTask.classList.remove("task-active");
+  const taskCommentError = currentTask.querySelector(".task-comment-error");
+  taskCommentError.style.visibility = "hidden";
+  const taskCommentTextArea = currentTask.querySelector('.comment-textarea')
+  taskCommentTextArea.value = ''
 };
 
 // function to get today date
@@ -85,21 +99,54 @@ const taskCreation = () => {
   newTask.classList.add("task");
   newTask.setAttribute("id", id);
   newTask.innerHTML = `
-    <h3 class="task-title">#${taskNumber} - ${formName.value}</h3>
-    <p class="task-category">Project: <span>${selectedCategoryText}</span></p>
-    <p class="task-user">Assigned to: <span>${selectedUserText}</span></p>
-    <p class="task-date-created">Created: <span>${date}</span></p>
-    <p class="task-deadline">Deadline: <span>${formDeadline.value}</span></p>
-    <div class="task-btns">
-      <button class="task-edit-btn">Edit</button>
-      <button onclick="progressTaskFurther(event)" class="task-progrees-btn">Move to next stage</button>
-    </div>
-  </div>`;
+  <div class="task-details">
+  <div class="task-text-details">
+  <h3 class="task-title">#${taskNumber} - ${formName.value}</h3>
+  <p class="task-category">Project: <span>${selectedCategoryText}</span></p>
+  <p class="task-user">Assigned to: <span>${formUser.value}</span></p>
+  <p class="task-date-created">Created: <span>${date}</span></p>
+  <p class="task-deadline">Deadline: <span>${formDeadline.value}</span></p>
+</div>
+</div>
+</div>
+<div class="task-comments">
+<h3>task comments</h3>
+<div class="comment-section">
+  <textarea
+    class="comment-textarea"
+    name=""
+    id=""
+    cols="30"
+    rows="5"
+    placeholder="Type new comment here"
+  ></textarea>
+  <ul class="comments-container">
+    <li class="comment">
+      <h4>
+        Posted by <span>admin</span> on the day of
+        <span>${date}</span>
+      </h4>
+      <p>${formDescriptionTextArea.value}</p>
+    </li>
+  </ul>
+</div>
+</div>
+<div class="task-btns">
+<button onclick="editTask(event)" class="task-edit-btn"> Edit</button>
+<button onclick="hideTask(event)" class="task-save-btn">Save</button>
+<button onclick="postNewComment(event)"class="task-comment-btn">Post comment</button>
+<button onclick="progressTaskFurther(event)"class="task-progrees-btn">
+  Move to next stage
+</button>
+</div>
+<p class="task-comment-error">You cannot post a empty comment!</p>`;
+
+if(newTask.classList)
 
   toBeDoneTaskList.appendChild(newTask);
   form.style.display = "none";
   id++;
-  taskNumber++;
+  taskNumber++
 };
 
 //Check inputs and create a new task
@@ -142,7 +189,7 @@ const CreateTask = () => {
   }
 
   //check task description
-  if (formDescriptionTextArea.value == "") {
+  if (formDescriptionTextArea.value == "" || formDescriptionTextArea.value == " ") {
     formDescriptionError.style.visibility = "visible";
     formDescriptionError.innerHTML = "Task description cannot be empty!";
   } else {
@@ -171,9 +218,15 @@ const CreateTask = () => {
 };
 
 //Function to create and add new comment to task
-const postNewComment = () => {
+const postNewComment = (event) => {
+  getCurrentDate();
 
-  getCurrentDate()
+  const commentBtn = event.target;
+  const currentTask = commentBtn.closest(".task");
+
+  const commentTextarea = currentTask.querySelector(".comment-textarea");
+  const commentsContainer = currentTask.querySelector(".comments-container");
+  const taskCommentError = currentTask.querySelector(".task-comment-error");
 
   if (commentTextarea.value == "") {
     taskCommentError.style.visibility = "visible";
@@ -181,14 +234,15 @@ const postNewComment = () => {
     taskCommentError.style.visibility = "hidden";
     const newComment = document.createElement("li");
     newComment.classList.add("comment");
-    newComment.setAttribute("id", commentId);
     newComment.innerHTML = `
-    <h4>Posted by <span>admin</span> on the day of<span> ${date}</span>
+    <h4>Posted by <span>Admin</span> on the day of<span> ${date}</span>
     </h4>
     <p>${commentTextarea.value}</p>`;
     commentsContainer.prepend(newComment);
     commentTextarea.value = "";
   }
+
+  return currentTask;
 };
 
 //Creates a new task
@@ -201,7 +255,7 @@ addTaskBtn.addEventListener("click", () => {
 });
 
 //close form to create tasks and clear inputs
-FormCancelBtn.addEventListener("click", () => {
+FormCancelBtn.addEventListener("click", (event) => {
   formName.value = "";
   formCategory.selectedIndex = 0;
   formUser.selectedIndex = 0;
@@ -209,6 +263,3 @@ FormCancelBtn.addEventListener("click", () => {
   formDescriptionTextArea.value = "";
   form.style.display = "none";
 });
-
-//Post new comment under task
-taskCommentBtn.addEventListener("click", postNewComment);

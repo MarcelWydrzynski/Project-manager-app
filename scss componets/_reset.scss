@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
+  overflow: hidden;
 }
 
 *,
@@ -25,7 +26,7 @@ ul {
 }
 
 body {
-    background-color: rgba(127, 255, 212, 0.527);
+    background-color: rgba(152, 153, 153, 0.527);
     font-family: "Roboto Condensed", sans-serif;
    
 }
