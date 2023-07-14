@@ -44,13 +44,22 @@ const progressTaskFurther = (event) => {
     toBeTestedContainer.appendChild(currentTask);
   } else if (parentContainer.classList.contains("to-be-tested")) {
     completedContainer.appendChild(currentTask);
+  }
+};
 
-    const deleteBtn = ProgreesBtn.closest(".task-progrees-btn");
-    deleteBtn.innerHTML = "Delete Task";
+////function that moves the task to the previous stage in app
+const moveTaskBackward = (event) => {
+  const ProgressBtn = event.target;
+  const parentContainer = ProgressBtn.closest(".task-list");
+  const currentTask = ProgressBtn.closest(".task");
 
-    deleteBtn.addEventListener("click", () => {
-      currentTask.remove();
-    });
+  if (parentContainer.classList.contains("in-progress")) {
+    parentContainer.removeChild(currentTask);
+    toBeDoneTaskList.appendChild(currentTask);
+  } else if (parentContainer.classList.contains("to-be-tested")) {
+    inProgressConatiner.appendChild(currentTask);
+  } else if (parentContainer.classList.contains("completed")) {
+    toBeTestedContainer.appendChild(currentTask);
   }
 };
 
@@ -67,8 +76,8 @@ const hideTask = (event) => {
   currentTask.classList.remove("task-active");
   const taskCommentError = currentTask.querySelector(".task-comment-error");
   taskCommentError.style.visibility = "hidden";
-  const taskCommentTextArea = currentTask.querySelector('.comment-textarea')
-  taskCommentTextArea.value = ''
+  const taskCommentTextArea = currentTask.querySelector(".comment-textarea");
+  taskCommentTextArea.value = "";
 };
 
 // function to get today date
@@ -101,52 +110,48 @@ const taskCreation = () => {
   newTask.innerHTML = `
   <div class="task-details">
   <div class="task-text-details">
-  <h3 class="task-title">#${taskNumber} - ${formName.value}</h3>
-  <p class="task-category">Project: <span>${selectedCategoryText}</span></p>
-  <p class="task-user">Assigned to: <span>${formUser.value}</span></p>
-  <p class="task-date-created">Created: <span>${date}</span></p>
-  <p class="task-deadline">Deadline: <span>${formDeadline.value}</span></p>
-</div>
-</div>
+    <h3 class="task-title">#${taskNumber} - ${formName.value}</h3>
+    <p class="task-category">Project: <span>${selectedCategoryText}</span></p>
+    <p class="task-user">Assigned to: <span>${formUser.value}</span></p>
+    <p class="task-date-created">Created: <span>${date}</span></p>
+    <p class="task-deadline">Deadline: <span>${formDeadline.value}</span></p>
+    <button onclick="deleteTask(event)" class="task-delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+  </div>
 </div>
 <div class="task-comments">
-<h3>task comments</h3>
-<div class="comment-section">
-  <textarea
-    class="comment-textarea"
-    name=""
-    id=""
-    cols="30"
-    rows="5"
-    placeholder="Type new comment here"
-  ></textarea>
-  <ul class="comments-container">
-    <li class="comment">
-      <h4>
-        Posted by <span>admin</span> on the day of
-        <span>${date}</span>
-      </h4>
-      <p>${formDescriptionTextArea.value}</p>
-    </li>
-  </ul>
-</div>
+  <h3>Task comments</h3>
+  <div class="comment-section">
+    <textarea class="comment-textarea" name="" id="" cols="30" rows="5" placeholder="Type new comment here"></textarea>
+    <ul class="comments-container">
+      <li class="comment">
+        <h4>
+          Posted by <span>admin</span> on the day of <span>${date}</span>
+        </h4>
+        <p>${formDescriptionTextArea.value}</p>
+      </li>
+    </ul>
+  </div>
 </div>
 <div class="task-btns">
-<button onclick="editTask(event)" class="task-edit-btn"> Edit</button>
-<button onclick="hideTask(event)" class="task-save-btn">Save</button>
-<button onclick="postNewComment(event)"class="task-comment-btn">Post comment</button>
-<button onclick="progressTaskFurther(event)"class="task-progrees-btn">
-  Move to next stage
-</button>
-</div>
-<p class="task-comment-error">You cannot post a empty comment!</p>`;
+              <button
+              onclick="moveTaskBackward(event)"
+              class="task-progrees-btn"
+            > <i class="fa-solid fa-arrow-left"></i>
+              <button onclick="editTask(event)" class="task-edit-btn">Add comment</button>
+              <button onclick="hideTask(event)" class="task-save-btn">Save</button>
+              <button onclick="postNewComment(event)" class="task-comment-btn">Post comment</button>
+              <button
+                onclick="progressTaskFurther(event)"
+                class="task-progrees-btn"
+              ><i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+<p class="task-comment-error">You cannot post an empty comment!</p>`;
 
-if(newTask.classList)
-
-  toBeDoneTaskList.appendChild(newTask);
+  if (newTask.classList) toBeDoneTaskList.appendChild(newTask);
   form.style.display = "none";
   id++;
-  taskNumber++
+  taskNumber++;
 };
 
 //Check inputs and create a new task
@@ -189,7 +194,10 @@ const CreateTask = () => {
   }
 
   //check task description
-  if (formDescriptionTextArea.value == "" || formDescriptionTextArea.value == " ") {
+  if (
+    formDescriptionTextArea.value == "" ||
+    formDescriptionTextArea.value == " "
+  ) {
     formDescriptionError.style.visibility = "visible";
     formDescriptionError.innerHTML = "Task description cannot be empty!";
   } else {
@@ -243,6 +251,12 @@ const postNewComment = (event) => {
   }
 
   return currentTask;
+};
+
+// Function that deletes the current task
+const deleteTask = (event) => {
+  const currentTask = event.target.closest(".task");
+  currentTask.remove();
 };
 
 //Creates a new task

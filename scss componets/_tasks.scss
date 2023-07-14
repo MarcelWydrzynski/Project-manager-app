@@ -4,8 +4,8 @@
   justify-content: space-around;
   overflow: hidden;
   height: 100%;
-  flex-wrap: wrap;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 .task-list {
@@ -78,6 +78,7 @@
   border-radius: 5px;
   background-color: rgb(248, 247, 247);
   width: 80%;
+  position: relative;
 
   h3 {
     border-bottom: dashed black;
@@ -100,6 +101,12 @@
   justify-content: space-between;
 }
 
+.task-delete-btn {
+position: absolute;
+top: 3%;
+right: 3%;
+}
+
 .task-text-details {
   display: flex;
   flex-direction: column;
@@ -110,7 +117,7 @@
 .task-btns {
   display: flex;
   justify-content: space-around;
-  gap: 10px;
+  gap: 5px;
  
 
   button {
@@ -124,14 +131,18 @@
 }
 
 .task-active {
-  width: 30vw;
-  height: 50vh;
+  width: 70vw;
+  height: 70vh;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px;
   z-index: 1000;
+
+  .task-delete-btn {
+    display: none;
+    }
 
   .task-progrees-btn {
     display: none;
@@ -161,7 +172,7 @@
   flex-direction: column;
   position: relative;
   overflow-y: scroll;
-  height: 30%;
+  height: 60%;
   border: 2px solid black;
   padding: 5px;
 

@@ -86,6 +86,7 @@
                 <p class="task-user">Assigned to: <span>Jim Halpert</span></p>
                 <p class="task-date-created">Created: <span>2023-5-13</span></p>
                 <p class="task-deadline">Deadline: <span>2023-05-18</span></p>
+                <button onclick="deleteTask(event)" class="task-delete-btn"><i class="fa-solid fa-trash-can"></i></button>
               </div>
             </div>
             <div class="task-comments">
@@ -104,14 +105,17 @@
               </div>
             </div>
             <div class="task-btns">
-              <button onclick="editTask(event)" class="task-edit-btn"> Edit</button>
+              <button
+              onclick="moveTaskBackward(event)"
+              class="task-progrees-btn"
+            > <i class="fa-solid fa-arrow-left"></i>
+              <button onclick="editTask(event)" class="task-edit-btn">Add comment</button>
               <button onclick="hideTask(event)" class="task-save-btn">Save</button>
               <button onclick="postNewComment(event)" class="task-comment-btn">Post comment</button>
               <button
                 onclick="progressTaskFurther(event)"
                 class="task-progrees-btn"
-              >
-                Move to next stage
+              ><i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
             <p class="task-comment-error">You cannot post a empty comment!</p>
